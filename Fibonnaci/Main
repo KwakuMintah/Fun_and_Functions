@@ -1,0 +1,35 @@
+// Fibonnaci.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
+#include <iostream>
+
+
+const int size = 1000;
+double arr[size] = {};
+
+void fibonnaciseq(double fib[], int end) {
+    int i, val_one, val_two;
+    
+    for (i = 0; i < end; i++) {
+        val_one = i - 1;
+        val_two = i - 2;
+        if (i == 0) {
+            fib[i] = 0;
+        }
+        else if (i == 1) {
+            fib[i] = 1;
+        }
+        else {
+            fib[i] = fib[val_two] + fib[val_one];
+        }
+        std::cout << "\n" << fib[i];
+    }
+}
+
+int main()
+{
+    std::cout << "Hello World!\n";
+
+    fibonnaciseq(arr, size);
+}
+
