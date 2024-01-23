@@ -1,0 +1,86 @@
+// Fibonnaci.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
+#include <iostream>
+
+
+const int size = 15;
+double arr[size] = {};
+double arrTwo[size] = {};
+double pascaltri[size] = {};
+
+int pascalVal(int n, int k) {
+    int i;
+    int res = 1;
+    if (k > n - k) {
+        k = n - k;
+    }
+    for (i = 0; i < k; i++) {
+        res *= (n - i);
+        res /= (i + 1);
+    }
+    return res;
+}
+
+void pascArray(int n) {
+    int row, i;
+    for (row = 0; row < n; row++) {
+        for (i = 0; i < row; i++) {
+            pascaltri[i] = pascalVal(row, i);
+        }
+    }
+}
+
+void fibonnaciseq(double fib[], int end) {
+    int i, val_one, val_two;
+    
+    for (i = 0; i < end; i++) {
+        val_one = i - 1;
+        val_two = i - 2;
+        if (i == 0) {
+            fib[i] = 0;
+        }
+        else if (i == 1) {
+            fib[i] = 1;
+        }
+        else {
+            fib[i] = fib[val_two] + fib[val_one];
+        }
+        std::cout << "\n" << fib[i];
+    }
+}
+
+void binomexp(double x, double y, double n, double pascal[], double res[]) {
+    int i;
+    double x_pow, y_pow, a;
+    std::cout << "\n" << "Binomial Expansion of " << "(" << x << " + " << y << ")^" << n;
+    for (i = 0; i < n; i++) {
+        x_pow = pow(x, n - i);
+        y_pow = pow(y, i);
+        a = pascal[i];
+        res[i] = a * x_pow * y_pow;
+        std::cout << "\n" << res[i];
+    }
+}
+
+void binomexpText(double n, double pascal[]) {
+    int i;
+    double x_pow, y_pow, a;
+    std::cout << "\n" << "Binomial Expansion of " << "(x + y)^" << n;
+    for (i = 0; i < n; i++) {
+        std::cout << "\n" << "a_" << pascal[i] << " x^" << n - i << " y^" << i;
+    }
+}
+
+int main()
+{
+    std::cout << "Hello World!\n";
+
+    std::cout << "\n" << "Fibonnaci for " << size << " iterations.";
+    fibonnaciseq(arr, size);
+
+    pascArray(size);
+    binomexp(4, 6, size, pascaltri, arrTwo);
+    binomexpText(size, pascaltri);
+}
+
