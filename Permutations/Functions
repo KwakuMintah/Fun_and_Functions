@@ -6,14 +6,14 @@ using namespace std;
 int factorial(int n) {
     int i;
     int fact = 1;
-    if (n <= 0) {
-        cout << "Too small.";
-        return fact;
-    }
-    else {
+    if (n > 1) {
         for (i = 1; i <= n; i++) {
             fact *= i;
         }
+        return fact;
+    }
+    else {
+        cout << "Too small.";
         return fact;
     }
 }
@@ -54,6 +54,51 @@ int combNoRep(int n, int sel) {
     den = selFact * nMinFact;
     val = nFact / den;
     return val;
+}
+
+int arrSize(double arr[]) {
+    int count = 0;
+    while (arr[count] != NULL) {
+        count++;
+    }
+    int size = count - 1;
+    return size;
+}
+
+//This prints all combinatios of an array of four elements. Working on making it modular
+void printArrOne(double arr[]) {
+    int i, j, k, l, size;
+    size = arrSize(arr);
+    for (i = 0; i < size; i++) {
+        for (j = 0; j < size; j++) {
+            for (k = 0; k < size; k++) {
+                for (l = 0; l < size; l++) {
+                    if ((i != j) && (j != k) && (k != l) && (i != k) && (j != l) && (i != l)) {
+                        cout << "\n" << arr[i] << "\t" << arr[j] << "\t" << arr[k] << "\t" << arr[l];
+                    }
+                    else {
+                        cout << " ";
+                    }
+                }
+            }
+        }
+    }
+}
+
+void printTest(double arr[], int level) {
+    int i, j, lesser, size;
+    lesser = level - 1;
+    size = arrSize(arr);
+    if (level == 0) {
+        for (i = 0; i < size; i++) {
+            cout << arr[i];
+        }
+    }
+    else {
+        for (j = 0; j < size; j++) {
+            printTest(arr, lesser);
+        }
+    }
 }
 
 #endif
