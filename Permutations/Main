@@ -5,7 +5,12 @@
 #include "Functions.hpp"
 using namespace std;
 
-double factorian;
+double arrOne[4] = { 10,8,7,5 };
+
+//Only works up to 19 for some reason
+int number = 4;
+int selection = 4;
+int one, two, three, four, five;
 
 
 
@@ -13,7 +18,10 @@ int main()
 {
     std::cout << "Hello World!\n";
 
-    factorian = factorial(5);
-    cout << factorian;
+    int size = arrSize(arrOne);
+    int combs = combRep(size, selection);
+    cout << combs;
+    printArrOne(arrOne);
+    //printTest(arrOne, 4);
 }
 
