@@ -1,0 +1,59 @@
+#include <iostream>
+using namespace std;
+#ifndef FUNCTIONSHEADERDEF
+#define FUNCTIONSHEADERDEF
+
+int factorial(int n) {
+    int i;
+    int fact = 1;
+    if (n <= 0) {
+        cout << "Too small.";
+        return fact;
+    }
+    else {
+        for (i = 1; i <= n; i++) {
+            fact *= i;
+        }
+        return fact;
+    }
+}
+
+int permRep(int n, int sel) {
+    int val;
+    val = pow(n, sel);
+    return val;
+}
+
+int permNoRep(int n, int sel) {
+    int val, nFact, nMin, nMinFact;
+    nFact = factorial(n);
+    nMin = n - sel;
+    nMinFact = factorial(nMin);
+    val = nFact / nMinFact;
+    return val;
+}
+
+int combRep(int n, int sel) {
+    int val, num, den, numFact, selFact, nMin, nMinFact;
+    nMin = n - 1;
+    num = sel + nMin;
+    numFact = factorial(num);
+    selFact = factorial(sel);
+    nMinFact = factorial(nMin);
+    den = selFact * nMinFact;
+    val = numFact / den;
+    return val;
+}
+
+int combNoRep(int n, int sel) {
+    int val, nFact, selFact, nMinFact, nMin, den;
+    nFact = factorial(n);
+    selFact = factorial(sel);
+    nMin = n - sel;
+    nMinFact = factorial(nMin);
+    den = selFact * nMinFact;
+    val = nFact / den;
+    return val;
+}
+
+#endif
