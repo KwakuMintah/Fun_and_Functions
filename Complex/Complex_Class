@@ -1,5 +1,4 @@
-hewwo
-
+/*
 comp(re,im)
 add
 sub
@@ -8,3 +7,97 @@ square?
 power
 abs
 other things (wiki)
+*/
+
+#include <iostream>
+using namespace std;
+#ifndef COMPLEXHEADERDEF
+#define COMPLEXHEADERDEF
+
+class complexDoub {
+public:
+	double real;
+	double imag;
+	complexDoub(double r, double i);
+	double abs(complexDoub comp);
+	double arg(complexDoub comp);
+	complexDoub conj(complexDoub comp);
+	complexDoub add(complexDoub compOne, complexDoub compTwo);
+	complexDoub sub(complexDoub compOne, complexDoub compTwo);
+	void print(complexDoub comp);
+};
+
+complexDoub::complexDoub(double r, double i) {
+	real = r;
+	imag = i;
+}
+
+double complexDoub::abs(complexDoub comp) {
+	double r, i, r_squ, i_squ, squ, abs_val;
+	r = comp.real;
+	i = comp.imag;
+	r_squ = pow(r, 2);
+	i_squ = pow(i, 2);
+	squ = r_squ + i_squ;
+	abs_val = sqrt(squ);
+	return abs_val;
+}
+
+double complexDoub::arg(complexDoub comp) {
+	double r, i, frac, arg_val;
+	r = comp.real;
+	i = comp.imag;
+	frac = i / r;
+	arg_val = atan(frac);
+	//Output is in Radians
+	return arg_val;
+}
+
+complexDoub complexDoub::conj(complexDoub comp) {
+	double r, i, i_alt;
+	r = comp.real;
+	i = comp.imag;
+	i_alt = -1 * i;
+	complexDoub conj(r, i_alt);
+	return conj;
+}
+
+complexDoub complexDoub::add(complexDoub compOne, complexDoub compTwo) {
+	double rOne, iOne, rTwo, iTwo, rSum, iSum;
+	rOne = compOne.real;
+	iOne = compOne.imag;
+	rTwo = compTwo.real;
+	iTwo = compTwo.imag;
+	rSum = rOne + rTwo;
+	iSum = iOne + iTwo;
+	complexDoub sum(rSum, iSum);
+	return sum;
+}
+
+complexDoub complexDoub::sub(complexDoub compOne, complexDoub compTwo) {
+	double rOne, iOne, rTwo, iTwo, rSum, iSum;
+	rOne = compOne.real;
+	iOne = compOne.imag;
+	rTwo = compTwo.real;
+	iTwo = compTwo.imag;
+	rSum = rOne - rTwo;
+	iSum = iOne - iTwo;
+	complexDoub sum(rSum, iSum);
+	return sum;
+}
+
+void complexDoub::print(complexDoub comp) {
+	double r, i, check;
+	r = comp.real;
+	i = comp.imag;
+	check = -1 * i;
+	if (check >= 0) {
+		cout << r << i << "i";
+	}
+	else {
+		cout << r << "+" << i << "i";
+	}
+}
+
+
+#endif
