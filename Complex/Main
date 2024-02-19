@@ -1,0 +1,16 @@
+// Complex_Numbers.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
+#include <iostream>
+#include "Complex.hpp"
+using namespace std;
+
+int main()
+{
+    std::cout << "Hello World!\n";
+
+    complexDoub CompOne(1, 2);
+    complexDoub CompTwo(3, 4);
+    complexDoub monk = CompTwo.conj(CompTwo);
+    CompTwo.print(monk);
+}
