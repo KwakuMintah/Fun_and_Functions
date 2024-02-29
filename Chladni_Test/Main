@@ -1,0 +1,70 @@
+// Chladni_Test.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
+#include <iostream>
+#include "KC.hpp"
+#include "Piano.hpp"
+using namespace std;
+
+double* waveFunc(double norm_x, double norm_y, double freq, int len, double ampl) {
+    double numOne, numTwo, numThree, numFour, coefOne, coefTwo, coefThree, coefFour, coefFive, L_half, L_sq;
+    double cosOne, cosTwo, cosThree, cosFour, cosFive;
+    double bracOne, bracTwo, brac, xy_val;
+    int i, j, t, rowMaj;
+    
+
+    double x = 0;
+    double y = 0;
+    L_sq = len * len;
+    double* wav = new double[L_sq + 1];
+    L_half = len / 2;
+    numOne = norm_x * pi * x;
+    numTwo = norm_y * pi * y;
+    numThree = norm_y * pi * x;
+    numFour = norm_x * pi * y;
+    coefOne = numOne / L_half;
+    coefTwo = numTwo / L_half;
+    coefThree = numThree / L_half;
+    coefFour = numFour / L_half;
+    cosOne = cos(coefOne);
+    cosTwo = cos(coefTwo);
+    cosThree = cos(coefThree);
+    cosFour = cos(coefFour);
+    
+
+    for (i = 0; i < len; i++) {
+        for (j = 0; j < len; j++) {
+            rowMaj = i * len;
+            t = rowMaj + j;
+            x = i;
+            y = j;
+            coefFive = freq * t;
+            cosFive = cos(coefFive);
+            bracOne = cosOne * cosTwo;
+            bracTwo = cosThree * cosFour;
+            brac = bracOne + bracTwo;
+            xy_val = ampl * brac * cosFive;
+            wav[t] = xy_val;
+        }
+    }
+    return wav;
+}
+
+int main()
+{
+    std::cout << "Hello World!\n";
+
+    int size = 20;
+    int size_sq = pow(size, 2);
+
+    double kE = kVal(E_1);
+    double cE = cVal(young_tit, 0.1, 0.3, pois_tit);
+    double freqETit = freqPlate(cE, kE);
+    cout << kE << "\t" << cE << "\t" << freqETit << "\n";
+    double* waveTest = waveFunc(1, 1, freqETit, size, 0.24);
+    //Can't seem to print whole array in one. Pointer issue; will work on.
+    int i;
+    for (i = 0; i < size_sq; i++) {
+        cout << "\t" << waveTest[i];
+    }
+}
