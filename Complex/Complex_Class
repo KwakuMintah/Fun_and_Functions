@@ -10,9 +10,12 @@ other things (wiki)
 */
 
 #include <iostream>
+#include <math.h>
 using namespace std;
 #ifndef COMPLEXHEADERDEF
 #define COMPLEXHEADERDEF
+
+double pi = 3.41;
 
 class complexDoub {
 public:
@@ -25,6 +28,10 @@ public:
 	complexDoub add(complexDoub compOne, complexDoub compTwo);
 	complexDoub sub(complexDoub compOne, complexDoub compTwo);
 	void print(complexDoub comp);
+	complexDoub logarithm(complexDoub comp, int k);
+	complexDoub mult(complexDoub compOne, complexDoub compTwo);
+	complexDoub square(complexDoub comp);
+	complexDoub power(complexDoub comp, int power);
 };
 
 complexDoub::complexDoub(double r, double i) {
@@ -99,5 +106,61 @@ void complexDoub::print(complexDoub comp) {
 	}
 }
 
+complexDoub complexDoub::logarithm(complexDoub comp, int k) {
+	double r, i, abz, argz, rot, logre, logim;
+	r = comp.real;
+	i = comp.imag;
+	abz = abs(comp);
+	argz = arg(comp);
+	logre = log(abz);
+	rot = 2 * k * pi;
+	logim = argz + rot;
+	complexDoub logans(logre, logim);
+	return logans;
+}
+
+complexDoub complexDoub::mult(complexDoub compOne, complexDoub compTwo) {
+	//Borrowed from S1W1 Challenge
+	double modOne, modTwo, thetaOne, thetaTwo, modSum, theCos, theSin, realSum, imagSum;
+	modOne = abs(compOne);
+	modTwo = abs(compTwo);
+	thetaOne = arg(compOne);
+	thetaTwo = arg(compTwo);
+	modSum = modOne * modTwo;
+	theCos = cos(thetaOne + thetaTwo);
+	theSin = sin(thetaOne + thetaTwo);
+	realSum = modSum * theCos;
+	imagSum = modSum * theSin;
+	complexDoub sum(realSum, imagSum);
+	return sum;
+}
+
+//Redundant but doesn't need you to type the same variable out twice in implementation
+complexDoub complexDoub::square(complexDoub comp) {
+	double r, i, reSq, imSq, sumRe, sumIm;
+	r = comp.real;
+	i = comp.imag;
+	reSq = pow(r, 2);
+	imSq = pow(i, 2);
+	sumRe = reSq - imSq;
+	sumIm = 2 * r * i;
+	complexDoub sum(sumRe, sumIm);
+	return sum;
+}
+//Might do a general power function
+complexDoub complexDoub::power(complexDoub comp, int power) {
+	if (power == 1) {
+		complexDoub sum = comp;
+		return sum;
+	}
+	else if (power == 2) {
+		complexDoub sum = square(comp);
+		return sum;
+	}
+	else {
+		cout << "Working on it.";
+	}
+	
+}
 
 #endif
