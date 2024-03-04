@@ -12,5 +12,16 @@ int main()
     complexDoub CompOne(1, 2);
     complexDoub CompTwo(3, 4);
     complexDoub monk = CompTwo.conj(CompTwo);
-    CompTwo.print(monk);
+    complexDoub ey = CompTwo.logarithm(CompTwo, 2);
+    complexDoub test = CompTwo.mult(CompOne, CompOne);
+    complexDoub es = CompTwo.square(CompOne);
+    complexDoub chicken = CompTwo.power(CompOne, 3);
+    //CompTwo.print(monk);
+    CompTwo.print(test);
+    cout << "\n";
+    //CompTwo.print(ey);
+    CompTwo.print(es);
+    cout << "\n";
+    CompTwo.print(chicken);
+    
 }
