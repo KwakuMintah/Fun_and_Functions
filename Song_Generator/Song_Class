@@ -1,0 +1,88 @@
+#include <iostream>
+#include <string>
+using namespace std;
+#ifndef SONGHEADERDEF
+#define SONGHEADERDEF
+
+class songOutput {
+public:
+	double root;
+	bool tone;
+	double semitone;
+	double progression;
+	songOutput(double r, bool t, double s, double p);
+	string convertRoot(double r);
+	string convertSemi(double s);
+	string convertTone(bool t);
+};
+
+songOutput::songOutput(double r, bool t, double s, double p) {
+	root = r;
+	tone = t;
+	semitone = s;
+	progression = p;
+}
+
+string songOutput::convertRoot(double r) {
+	string out;
+	string error = "Error: No corresponding note.\n";
+	if (r > 12 || r < 1) {
+		return error;
+	}
+	else {
+		if (r == 1) {
+			out = "C";
+		}
+		else if (r == 2) {
+			out = "D";
+		}
+		else if (r == 3) {
+			out = "E";
+		}
+		else if (r == 4) {
+			out = "F";
+		}
+		else if (r == 5) {
+			out = "G";
+		}
+		else if (r == 6) {
+			out = "A";
+		}
+		else if (r == 7) {
+			out = "B";
+		}
+	}
+	return out;
+}
+
+string songOutput::convertSemi(double s) {
+	string out;
+	string error = "Error: Value out of range.\n";
+	if (s == 0) {
+		out.clear();
+	}
+	else if (s == 1) {
+		out = "b";
+	}
+	else if (s == 2) {
+		out = "#";
+	}
+	else {
+		return error;
+	}
+	return out;
+}
+
+string songOutput::convertTone(bool t) {
+	string out;
+	string error = "Error: Value out of range.\n";
+	if (t == true) {
+		out = "m";
+	}
+	else {
+		out.clear();
+	}
+	return out;
+}
+
+#endif
