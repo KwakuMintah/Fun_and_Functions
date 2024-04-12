@@ -1,12 +1,12 @@
 clear  all;
 load("ChladniE.m");
 load("ChladniA.m");
-load("ChadniOct.m");
+load("ChladniOct.m");
 
 sizeMat = size(ChladniA);
 side = sqrt(sizeMat(1));
 
-E = reshape(ChaldniE,side,side);
+E = reshape(ChladniE,side,side);
 A = reshape(ChladniA,side,side);
 Oct = reshape(ChladniOct,side,side);
 
