@@ -8,25 +8,58 @@
 #include "No_Young.hpp"
 using namespace std;
 
+//This is all in mm
+
+void announcement(bool choice_mat, bool choice_shape, double freq, int size) {
+    //True is Al and Square
+    if (choice_mat == true) {
+        if (choice_shape == true) {
+            cout << "Simulation of Aluminium Chladni Plate at frequency of " << freq << " and side length of " << size << ".";
+        }
+        else {
+            cout << "Simulation of Aluminium Chladni Plate at frequency of " << freq << " and diameter of " << size << ".";
+        }
+    }
+    else {
+        if (choice_shape == true) {
+            cout << "Simulation of Steel Chladni Plate at frequency of " << freq << " and side length of " << size << ".";
+        }
+        else {
+            cout << "Simulation of Steel Chladni Plate at frequency of " << freq << " and diameter of " << size << ".";
+        }
+    }
+};
+
 int main()
 {
     std::cout << "Hello World!\n";
     ofstream datafile("Chladni.m");
 
-    double kE = kVal(E_1);
-    double cE = cVal(young_steel, 0.1, 0.3, pois_steel);
+    double kE = kVal(880);
+    //Divide density by 1000 to go from g/cm to g/mm
+    double cE = cVal(young_al_exp, 0.168, 0.0027, pois_al);
     double freqE = freqPlate(cE, kE);
 
-    int size = 100;
+    int size = 200;
     int size_sq = pow(size, 2);
+    
+    announcement(true, true, freqE, size);
+    
     double* waveTestOne = waveEq(1, 0, freqE, 1, size, 1000);
+    cout << "\n" << "Mode of 1,0 Finished";
     double* waveTestTwo = waveEq(1, 1, freqE, 1, size, 1000);
+    cout << "\n" << "Mode of 1,1 Finished";
     double* waveTestThree = waveEq(2, 0, freqE, 1, size, 1000);
+    cout << "\n" << "Mode of 2,0 Finished";
     double* waveTestFour = waveEq(2, 1, freqE, 1, size, 1000);
-    double* waveTestFive = waveEq(3, 1, freqE, 1, size, 1000);
+    cout << "\n" << "Mode of 2,1 Finished";
+    double* waveTestFive = waveEq(3, 0, freqE, 1, size, 1000);
+    cout << "\n" << "Mode of 3,0 Finished";
+    double* waveTestSix = waveEq(3, 1, freqE, 1, size, 1000);
+    cout << "\n" << "Mode of 3,1 Finished";
     int i;
     for (i = 0; i < size_sq; i++) {
-        datafile << "\n" << waveTestOne[i] << "\t" << waveTestTwo[i] << "\t" << waveTestThree[i] << "\t" << waveTestFour[i] << "\t" << waveTestFive[i];
+        datafile << "\n" << waveTestOne[i] << "\t" << waveTestTwo[i] << "\t" << waveTestThree[i] << "\t" << waveTestFour[i] << "\t" << waveTestFive[i] << "\t" << waveTestSix[i];
     }
 
 }
