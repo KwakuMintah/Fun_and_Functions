@@ -3,6 +3,8 @@ using namespace std;
 #ifndef PIANOHEADERDEF
 #define PIANOHEADERDEF
 
+//This is all in Hertz
+
 double C_0 = 16.35;
 double Cs_0 = 17.32;
 double D_0 = 18.35;
