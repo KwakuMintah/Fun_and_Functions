@@ -1,0 +1,41 @@
+#include <iostream>
+#include "Constants.hpp"
+using namespace std;
+#ifndef NOYOUNGHEADERDEF
+#define NOYOUNGHEADERDEF
+
+double* waveEq(int modeX, int modeY, double freq, double ampl, double L, int time) {
+	int x, y, t, rowMaj, iter;
+	double w, w_sq, modeX_sq, modeY_sq;
+	double L_sq = pow(L,2);
+	double* wav = new double[L_sq + 1];
+
+	modeX_sq = pow(modeX,2);
+	modeY_sq = pow(modeY,2);
+	w_sq = freq * (modeX_sq + modeY_sq);
+	w = sqrt(w_sq);
+	
+	double cosNxMatch_coef, cosNxDiff_coef, cosNyMatch_coef, cosNyDiff_coef;
+	double cosNxMatch, cosNxDiff, cosNyMatch, cosNyDiff;
+	for (t = 0; t < time; t++) {
+		for (x = 0; x < L; x++) {
+			for (y = 0; y < L; y++) {
+				rowMaj = y * L;
+				iter = rowMaj + x;
+				cosNxMatch_coef = (modeX * pi * x) / L;
+				cosNxDiff_coef = (modeX * pi * y) / L;
+				cosNyMatch_coef = (modeY * pi * y) / L;
+				cosNyDiff_coef = (modeY * pi * x) / L;
+				cosNxMatch = cos(cosNxMatch_coef);
+				cosNxDiff = cos(cosNxDiff_coef);
+				cosNyMatch = cos(cosNyMatch_coef);
+				cosNyDiff = cos(cosNyDiff_coef);
+				
+				wav[iter] = (ampl * ((cosNxMatch * cosNxDiff) + (cosNyDiff * cosNyMatch)) * cos(w * t));
+			}
+		}
+	}
+	return wav;
+}
+
+#endif
