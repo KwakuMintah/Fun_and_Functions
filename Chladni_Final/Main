@@ -14,18 +14,18 @@ void announcement(bool choice_mat, bool choice_shape, double freq, int size) {
     //True is Al and Square
     if (choice_mat == true) {
         if (choice_shape == true) {
-            cout << "Simulation of Aluminium Chladni Plate at frequency of " << freq << " and side length of " << size << ".";
+            cout << "\n" << "Simulation of Aluminium Chladni Plate at frequency of " << freq << " and side length of " << size << ".";
         }
         else {
-            cout << "Simulation of Aluminium Chladni Plate at frequency of " << freq << " and diameter of " << size << ".";
+            cout << "\n" << "Simulation of Aluminium Chladni Plate at frequency of " << freq << " and diameter of " << size << ".";
         }
     }
     else {
         if (choice_shape == true) {
-            cout << "Simulation of Steel Chladni Plate at frequency of " << freq << " and side length of " << size << ".";
+            cout << "\n" << "Simulation of Steel Chladni Plate at frequency of " << freq << " and side length of " << size << ".";
         }
         else {
-            cout << "Simulation of Steel Chladni Plate at frequency of " << freq << " and diameter of " << size << ".";
+            cout << "\n" << "Simulation of Steel Chladni Plate at frequency of " << freq << " and diameter of " << size << ".";
         }
     }
 };
@@ -35,7 +35,8 @@ int main()
     std::cout << "Hello World!\n";
     ofstream datafile("Chladni.m");
 
-    double kE = kVal(880);
+    double kE = kVal(629.8);
+    //double kE = otherKVal(2, 0, 200);
     //Divide density by 1000 to go from g/cm to g/mm
     double cE = cVal(young_al_exp, 0.168, 0.0027, pois_al);
     double freqE = freqPlate(cE, kE);
@@ -45,17 +46,17 @@ int main()
     
     announcement(true, true, freqE, size);
     
-    double* waveTestOne = waveEq(1, 0, freqE, 1, size, 1000);
+    double* waveTestOne = waveEq(1, 0, freqE, 1, size, 100);
     cout << "\n" << "Mode of 1,0 Finished";
-    double* waveTestTwo = waveEq(1, 1, freqE, 1, size, 1000);
+    double* waveTestTwo = waveEq(1, 1, freqE, 1, size, 100);
     cout << "\n" << "Mode of 1,1 Finished";
-    double* waveTestThree = waveEq(2, 0, freqE, 1, size, 1000);
+    double* waveTestThree = waveEq(2, 0, freqE, 1, size, 100);
     cout << "\n" << "Mode of 2,0 Finished";
-    double* waveTestFour = waveEq(2, 1, freqE, 1, size, 1000);
+    double* waveTestFour = waveEq(2, 1, freqE, 1, size, 100);
     cout << "\n" << "Mode of 2,1 Finished";
-    double* waveTestFive = waveEq(3, 0, freqE, 1, size, 1000);
+    double* waveTestFive = waveEq(3, 0, freqE, 1, size, 100);
     cout << "\n" << "Mode of 3,0 Finished";
-    double* waveTestSix = waveEq(3, 1, freqE, 1, size, 1000);
+    double* waveTestSix = waveEq(3, 1, freqE, 1, size, 100);
     cout << "\n" << "Mode of 3,1 Finished";
     int i;
     for (i = 0; i < size_sq; i++) {
