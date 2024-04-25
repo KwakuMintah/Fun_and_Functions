@@ -1,0 +1,23 @@
+#include <iostream>
+#include <fstream>
+#include "KC.hpp"
+#include "Piano.hpp"
+#include "No_Young.hpp"
+using namespace std;
+
+int main()
+{
+    std::cout << "Hello World!\n";
+    ofstream datafile("ChladniE.m");
+
+    int size = 10000;
+    int size_sq = pow(size, 2);
+    double* waveTestOne = waveEq(1, 0, E_1, 0.5, size, 10);
+    double* waveTestTwo = waveEq(1, 1, E_1, 0.5, size, 10);
+    double* waveTestThree = waveEq(2, 0, E_1, 0.5, size, 10);
+    double* waveTestFour = waveEq(2, 1, E_1, 0.5, size, 10);
+    double* waveTestFive = waveEq(3, 1, E_1, 0.5, size, 10);
+    int i;
+    for (i = 0; i < size_sq; i++) {
+        datafile << "\n" << waveTestOne[i] << "\t" << waveTestTwo[i] << "\t" << waveTestThree[i] << "\t" << waveTestFour[i] << "\t" << waveTestFive[i];
+    }
