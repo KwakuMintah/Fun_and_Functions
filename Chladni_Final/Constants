@@ -3,6 +3,8 @@ using namespace std;
 #ifndef CONSTANTSHEADERDEF
 #define CONSTANTSHEADERDEF
 
+//Young's Modulus is in N/m^2
+
 double pi = 3.14;
 double pi_doub = 2 * pi;
 
@@ -24,5 +26,10 @@ double pois_brass = 0.34;
 double pois_cop = 0.34;
 double pois_steel = 0.3;
 double pois_tit = 0.34;
+
+//Divide it by 1000000 to get it in N/mm^2
+double young_al_exp = young_al / 1000000;
+double young_steel_exp = young_al / 1000000;
+
 
 #endif
