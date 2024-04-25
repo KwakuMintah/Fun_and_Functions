@@ -1,0 +1,31 @@
+#include <iostream>
+#include "Constants.hpp"
+using namespace std;
+#ifndef KCHEADERDEF
+#define KCHEADERDEF
+
+double kVal(double freq) {
+	double val = freq * pi_doub;
+	return val;
+}
+
+double cVal(double young, double thick, double dens, double pois) {
+	double coef = 1 / pi_doub;
+	double thi_sq = pow(thick, 2);
+	double num = young * thi_sq;
+	double pois_sq = pow(pois, 2);
+	double brac = 1 - pois_sq;
+	double out_brac = 12 * dens;
+	double den = out_brac * brac;
+	double frac = num / den;
+	double frac_root = sqrt(frac);
+	double val = coef * frac_root;
+	return val;
+}
+
+double freqPlate(double C, double K) {
+	double val = C * K;
+	return val;
+}
+
+#endif
