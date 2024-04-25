@@ -24,7 +24,8 @@ double cVal(double young, double thick, double dens, double pois) {
 }
 
 double freqPlate(double C, double K) {
-	double val = C * K;
+	double k_sq = pow(K, 2);
+	double val = C * k_sq;
 	return val;
 }
 
