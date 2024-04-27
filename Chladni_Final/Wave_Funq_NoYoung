@@ -4,17 +4,17 @@ using namespace std;
 #ifndef NOYOUNGHEADERDEF
 #define NOYOUNGHEADERDEF
 
-double* waveEq(int modeX, int modeY, double freq, double ampl, double L, int time) {
+double* waveEq(int modeX, int modeY, double freq, double ampl, int L, int time) {
 	int x, y, t, rowMaj, iter;
 	double w, w_sq, modeX_sq, modeY_sq;
-	double L_sq = pow(L,2);
+	double L_sq = pow(L, 2);
 	double* wav = new double[L_sq + 1];
 
-	modeX_sq = pow(modeX,2);
-	modeY_sq = pow(modeY,2);
+	modeX_sq = pow(modeX, 2);
+	modeY_sq = pow(modeY, 2);
 	w_sq = freq * (modeX_sq + modeY_sq);
 	w = sqrt(w_sq);
-	
+
 	double cosNxMatch_coef, cosNxDiff_coef, cosNyMatch_coef, cosNyDiff_coef;
 	double cosNxMatch, cosNxDiff, cosNyMatch, cosNyDiff;
 	for (t = 0; t < time; t++) {
@@ -30,12 +30,31 @@ double* waveEq(int modeX, int modeY, double freq, double ampl, double L, int tim
 				cosNxDiff = cos(cosNxDiff_coef);
 				cosNyMatch = cos(cosNyMatch_coef);
 				cosNyDiff = cos(cosNyDiff_coef);
-				
+
 				wav[iter] = (ampl * ((cosNxMatch * cosNxDiff) + (cosNyDiff * cosNyMatch)) * cos(w * t));
 			}
 		}
 	}
 	return wav;
+}
+
+double* conversion(double* waveFunc, int L) {
+	int i;
+	double L_sq = pow(L, 2);
+	double* output = new double[L_sq + 1];
+
+	for (i = 0; i < L_sq; i++) {
+		if (waveFunc[i] < -0.05) {
+			output[i] = 1;
+		}
+		else if (waveFunc[i] > 0.05) {
+			output[i] = 1;
+		}
+		else {
+			output[i] = 0;
+		};
+	}
+	return output;
 }
 
 #endif
