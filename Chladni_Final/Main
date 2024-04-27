@@ -1,11 +1,11 @@
-// Chladni_Test.cpp : This file contains the 'main' function. Program execution begins and ends there.
+// Chladni_Simulation.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
 #include <iostream>
 #include <fstream>
 #include "KC.hpp"
 #include "Piano.hpp"
-#include "No_Young.hpp"
+#include "WaveFunc.hpp"
 using namespace std;
 
 //This is all in mm
@@ -43,21 +43,21 @@ int main()
 
     int size = 200;
     int size_sq = pow(size, 2);
-    
+
     announcement(true, true, freqE, size);
-    
+
     double* waveTestOne = waveEq(1, 0, freqE, 1, size, 100);
     cout << "\n" << "Mode of 1,0 Finished";
-    double* waveTestTwo = waveEq(1, 1, freqE, 1, size, 100);
-    cout << "\n" << "Mode of 1,1 Finished";
-    double* waveTestThree = waveEq(2, 0, freqE, 1, size, 100);
+    double* waveTestTwo = conversion(waveTestOne, size);
+    cout << "\n" << "Mode of 1,0 Grayscale Finished";
+    double* waveTestThree = waveEq(2, 1, freqE, 1, size, 100);
     cout << "\n" << "Mode of 2,0 Finished";
-    double* waveTestFour = waveEq(2, 1, freqE, 1, size, 100);
-    cout << "\n" << "Mode of 2,1 Finished";
-    double* waveTestFive = waveEq(3, 0, freqE, 1, size, 100);
-    cout << "\n" << "Mode of 3,0 Finished";
-    double* waveTestSix = waveEq(3, 1, freqE, 1, size, 100);
+    double* waveTestFour = conversion(waveTestThree, size);
+    cout << "\n" << "Mode of 2,0 Grayscale Finished";
+    double* waveTestFive = waveEq(3, 1, freqE, 1, size, 100);
     cout << "\n" << "Mode of 3,1 Finished";
+    double* waveTestSix = conversion(waveTestFive, size);
+    cout << "\n" << "Mode of 3,1 Grayscale Finished";
     int i;
     for (i = 0; i < size_sq; i++) {
         datafile << "\n" << waveTestOne[i] << "\t" << waveTestTwo[i] << "\t" << waveTestThree[i] << "\t" << waveTestFour[i] << "\t" << waveTestFive[i] << "\t" << waveTestSix[i];
