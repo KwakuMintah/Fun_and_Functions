@@ -5,7 +5,7 @@
 #include <fstream>
 #include "KC.hpp"
 #include "Piano.hpp"
-#include "WaveFunc.hpp"
+#include "Function.hpp"
 using namespace std;
 
 //This is all in mm
@@ -34,6 +34,8 @@ int main()
 {
     std::cout << "Hello World!\n";
     ofstream datafile("Chladni.m");
+    
+    int i;
 
     double kE = kVal(629.8);
     //double kE = otherKVal(2, 0, 200);
@@ -41,11 +43,17 @@ int main()
     double cE = cVal(young_al_exp, 0.168, 0.0027, pois_al);
     double freqE = freqPlate(cE, kE);
 
-    int size = 200;
+    int size = 240;
     int size_sq = pow(size, 2);
 
     announcement(true, true, freqE, size);
 
+    impedanceGraph(v_nought, current, 50, 60, size);
+
+    //animation(50, 60, 2, 1, 1, size, 100);
+    
+
+    
     double* waveTestOne = waveEq(1, 0, freqE, 1, size, 100);
     cout << "\n" << "Mode of 1,0 Finished";
     double* waveTestTwo = conversion(waveTestOne, size);
@@ -58,9 +66,9 @@ int main()
     cout << "\n" << "Mode of 3,1 Finished";
     double* waveTestSix = conversion(waveTestFive, size);
     cout << "\n" << "Mode of 3,1 Grayscale Finished";
-    int i;
     for (i = 0; i < size_sq; i++) {
         datafile << "\n" << waveTestOne[i] << "\t" << waveTestTwo[i] << "\t" << waveTestThree[i] << "\t" << waveTestFour[i] << "\t" << waveTestFive[i] << "\t" << waveTestSix[i];
     }
+    
 
 }
