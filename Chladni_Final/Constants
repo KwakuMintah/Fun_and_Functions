@@ -33,5 +33,8 @@ double pois_tit = 0.34;
 double young_al_exp = young_al / 1000000;
 double young_steel_exp = young_al / 1000000;
 
+double v_nought = 230;
+double current = 2.3;
+
 
 #endif
