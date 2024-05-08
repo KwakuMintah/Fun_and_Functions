@@ -5,7 +5,7 @@
 #include <fstream>
 #include "KC.hpp"
 #include "Piano.hpp"
-#include "Function.hpp"
+#include "WaveFunc.hpp"
 using namespace std;
 
 //This is all in mm
@@ -34,7 +34,7 @@ int main()
 {
     std::cout << "Hello World!\n";
     ofstream datafile("Chladni.m");
-    
+
     int i;
 
     double kE = kVal(629.8);
@@ -51,24 +51,24 @@ int main()
     impedanceGraph(v_nought, current, 50, 60, size);
 
     //animation(50, 60, 2, 1, 1, size, 100);
-    
 
-    
-    double* waveTestOne = waveEq(1, 0, freqE, 1, size, 100);
-    cout << "\n" << "Mode of 1,0 Finished";
-    double* waveTestTwo = conversion(waveTestOne, size);
-    cout << "\n" << "Mode of 1,0 Grayscale Finished";
-    double* waveTestThree = waveEq(2, 1, freqE, 1, size, 100);
-    cout << "\n" << "Mode of 2,0 Finished";
-    double* waveTestFour = conversion(waveTestThree, size);
-    cout << "\n" << "Mode of 2,0 Grayscale Finished";
-    double* waveTestFive = waveEq(3, 1, freqE, 1, size, 100);
-    cout << "\n" << "Mode of 3,1 Finished";
-    double* waveTestSix = conversion(waveTestFive, size);
-    cout << "\n" << "Mode of 3,1 Grayscale Finished";
+
+    cout << "\n" << "Testing Different Times.";
+    double* waveTestOne = waveEq(2, 1, freqE, 1, size, 10);
+    cout << "\n" << "Measuring Time of 10s Finished";
+    double* waveTestTwo = waveEq(2, 1, freqE, 1, size, 20);
+    cout << "\n" << "Measuring Time of 20s Finished";
+    double* waveTestThree = waveEq(2, 1, freqE, 1, size, 50);
+    cout << "\n" << "Measuring Time of 50s Finished";
+    double* waveTestFour = waveEq(2, 1, freqE, 1, size, 100);
+    cout << "\n" << "Measuring Time of 100s Finished";
+    double* waveTestFive = waveEq(2, 1, freqE, 1, size, 200);
+    cout << "\n" << "Measuring Time of 200s Finished";
+    double* waveTestSix = waveEq(2, 1, freqE, 1, size, 500);
+    cout << "\n" << "Measuring Time of 500s Finished";
     for (i = 0; i < size_sq; i++) {
         datafile << "\n" << waveTestOne[i] << "\t" << waveTestTwo[i] << "\t" << waveTestThree[i] << "\t" << waveTestFour[i] << "\t" << waveTestFive[i] << "\t" << waveTestSix[i];
     }
-    
+
 
 }
