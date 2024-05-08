@@ -1,0 +1,7 @@
+﻿  Chladni_Simulation.cpp
+C:\Users\ashia\Documents\Uni\Labs\Group Project\Simulation\Chladni_Simulation\WaveFunc.hpp(14,36): warning C4244: 'initializing': conversion from 'double' to 'size_t', possible loss of data
+C:\Users\ashia\Documents\Uni\Labs\Group Project\Simulation\Chladni_Simulation\WaveFunc.hpp(52,36): warning C4244: 'initializing': conversion from 'double' to 'size_t', possible loss of data
+C:\Users\ashia\Documents\Uni\Labs\Group Project\Simulation\Chladni_Simulation\WaveFunc.hpp(91,36): warning C4244: 'initializing': conversion from 'double' to 'size_t', possible loss of data
+C:\Users\ashia\Documents\Uni\Labs\Group Project\Simulation\Chladni_Simulation\WaveFunc.hpp(146,39): warning C4244: 'initializing': conversion from 'double' to 'size_t', possible loss of data
+C:\Users\ashia\Documents\Uni\Labs\Group Project\Simulation\Chladni_Simulation\Chladni_Simulation.cpp(47,17): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  Chladni_Simulation.vcxproj -> C:\Users\ashia\Documents\Uni\Labs\Group Project\Simulation\Chladni_Simulation\x64\Debug\Chladni_Simulation.exe
