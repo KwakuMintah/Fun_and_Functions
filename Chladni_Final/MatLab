@@ -6,7 +6,6 @@ chladniTwo = Chladni(:,2);
 chladniThree = Chladni(:,3);
 chladniFour = Chladni(:,4);
 chladniFive = Chladni(:,5);
-chladniSix = Chladni(:,6);
 
 sizeMat = size(Chladni);
 side = sqrt(sizeMat(1));
@@ -16,6 +15,22 @@ ETwo = reshape(chladniTwo,side,side);
 EThree = reshape(chladniThree,side,side);
 EFour = reshape(chladniFour,side,side);
 EFive = reshape(chladniFive,side,side);
-ESix = reshape(chladniSix,side,side);
 
-figOne = imagesc(EThree);
+%figOne = imagesc(EThree);
+animFig = figure;
+loops = 90;
+M(loops) = struct('cdata',[],'colormap',[]);
+files = dir("*.txt");
+for i = 1:length(files)
+    load(files(i).name, "-ascii");
+end
+sizeFrame = size(X0);
+sideFrame = sqrt(sizeFrame(1));
+for j = 1:loops
+    mat = files{j};
+    frame = reshape(mat,sideFrame,sideFrame);
+    drawnow
+    M(j) = getframe;
+end
+animFig.Visible = 'on';
+movie(M);
