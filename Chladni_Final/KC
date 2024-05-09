@@ -4,19 +4,12 @@ using namespace std;
 #ifndef KCHEADERDEF
 #define KCHEADERDEF
 
-double kVal(double freq) {
-	double val = (freq * pi_doub) / sound_v;
-	cout << "\n" << "Wave Number is: " << val;
-	return val;
-}
-
-double otherKVal(int modeX, int modeY, int size) {
-	double coef = pi / size;
-	double modeX_sq = pow(modeX, 2);
-	double modeY_sq = pow(modeY, 2);
-	double root = sqrt(modeX_sq + modeY_sq);
-	double val = coef * root;
-	cout << "\n" << "Wave Number is: " << val;
+double kVal(double freq, double dens, double young) {
+	double dens_sqrt = sqrt(dens);
+	double young_sqrt = sqrt(young);
+	double num, val;
+	num = pi_doub * freq * dens_sqrt;
+	val = num / young_sqrt;
 	return val;
 }
 
