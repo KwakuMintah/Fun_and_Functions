@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Constants.hpp"
 #include <fstream>
+#include <string>
+
 using namespace std;
 #ifndef NOYOUNGHEADERDEF
 #define NOYOUNGHEADERDEF
@@ -42,12 +44,12 @@ double* waveEq(int modeX, int modeY, double freq, double ampl, int L, int time) 
 }
 
 double* waveEqCircle(int modeX, int modeY, double freq, double ampl, int L, int time) {
-	//Not very confident on this one
+	//Differentiated with Product Rule now
+	//Still doesn't work
 	int theta, r, t, rowMaj, iter, pi_doub_int;
 	double w, w_sq, modeX_sq, modeY_sq, theta_real;
 	double L_sq = pow(L, 2);
 	double L_half = L / 2;
-	double L_half_sq = L_half / 2;
 
 	double* wav = new double[L_sq + L + 1];
 
@@ -59,22 +61,26 @@ double* waveEqCircle(int modeX, int modeY, double freq, double ampl, int L, int 
 	w = sqrt(w_sq);
 
 	//Theta is in radians
-	double sinNx_coef, sinNy_coef, cosNy_coef;
-	double sinNx, sinNy, cosNy;
+	double x, y;
+	double sinN_coef, cosNx_coef, cosNy_coef;
+	double sinN, cosNx, cosNy;
 	for (t = 0; t < time; t++) {
 		for (r = 0; r < L; r++) {
 			for (theta = 0; theta < pi_doub_int; theta++) {
-				rowMaj = theta * L;
-				iter = r + rowMaj;
 				theta_real = theta / time;
-				sinNx_coef = modeX * L_half * cos(theta_real);
-				sinNy_coef = modeY * L_half * sin(theta_real);
+				x = r * cos(theta_real);
+				y = r * sin(theta_real);
+				rowMaj = y * L;
+				iter = int(x + rowMaj);
+				sinN_coef = (modeX * L_half * cos(theta_real)) + (modeY * L_half * sin(theta_real));
+				cosNx_coef = modeX * r;
 				cosNy_coef = modeY * r;
-				sinNx = sin(sinNx_coef);
-				sinNy = sin(sinNy_coef);
+				sinN = sin(sinN_coef);
+				cosNx = cos(cosNx_coef);
 				cosNy = cos(cosNy_coef);
 
-				wav[iter] = (ampl * (L_sq * ((sinNx) * (sinNy)) - cosNy) * cos(w * t));
+				wav[iter] = (ampl * ((L_half * sinN) + (cosNx * cosNy) + 1) * cos(w * t));
+				cout << "\n" << cos(w * t);
 			}
 		}
 	}
@@ -121,9 +127,10 @@ double* waveEqSquared(int modeX, int modeY, double freq, double ampl, int L, int
 }
 
 void animation(int low, int high, int modeX, int modeY, double ampl, int L, int time) {
-	ofstream datafile("ChladniAnim.txt");
+	ofstream datafile;
 	int i, j, l;
 	int range = high - low;
+	double L_sq = pow(L, 2);
 	double* output;
 	double** wave = new double* [range];
 	for (i = low; i < high; i++) {
@@ -132,11 +139,14 @@ void animation(int low, int high, int modeX, int modeY, double ampl, int L, int 
 	}
 	for (j = 0; j < range; j++) {
 		output = wave[j];
-		for (l = 0; l < time; l++) {
+		cout << "\n" << "Creating file " << j;
+		//"C:/Users/phkm/Documents/Chladni/Chladni_Sim/Chladni_Sim/Anim/"
+		datafile.open(to_string(j) + ".txt");
+		for (l = 0; l < L_sq; l++) {
 			datafile << output[l] << "\n";
 		}
 		//Can't print out as I would like just yet
-		datafile << "\n";
+		datafile.close();
 	}
 }
 
