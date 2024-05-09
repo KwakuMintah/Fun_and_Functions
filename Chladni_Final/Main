@@ -37,16 +37,17 @@ int main()
 
     int i;
 
-    double kE = kVal(629.8);
-    //double kE = otherKVal(2, 0, 200);
+
+    double kE = kVal(629.8, 0.0027, young_steel_exp);
     //Divide density by 1000 to go from g/cm to g/mm
-    double cE = cVal(young_al_exp, 0.168, 0.0027, pois_al);
+    double cE = cVal(young_steel_exp, 0.168, 0.0027, pois_steel);
     double freqE = freqPlate(cE, kE);
+   
 
     int size = 240;
     int size_sq = pow(size, 2);
 
-    announcement(true, true, freqE, size);
+    announcement(true, true, 629.8, size);
 
     impedanceGraph(v_nought, current, 50, 60, size);
 
@@ -54,20 +55,20 @@ int main()
 
 
     cout << "\n" << "Testing Different Times.";
-    double* waveTestOne = waveEq(2, 1, freqE, 1, size, 10);
+    double* waveTestOne = waveEq(2, 1, freqE, 1, size, 5);
     cout << "\n" << "Measuring Time of 10s Finished";
-    double* waveTestTwo = waveEq(2, 1, freqE, 1, size, 20);
+    double* waveTestTwo = waveEq(2, 1, freqE, 1, size, 10);
     cout << "\n" << "Measuring Time of 20s Finished";
-    double* waveTestThree = waveEq(2, 1, freqE, 1, size, 50);
+    double* waveTestThree = waveEq(2, 1, freqE, 1, size, 15);
     cout << "\n" << "Measuring Time of 50s Finished";
-    double* waveTestFour = waveEq(2, 1, freqE, 1, size, 100);
+    double* waveTestFour = waveEq(2, 1, freqE, 1, size, 20);
     cout << "\n" << "Measuring Time of 100s Finished";
-    double* waveTestFive = waveEq(2, 1, freqE, 1, size, 200);
+    double* waveTestFive = waveEq(2,1, freqE, 1, size, 30);
     cout << "\n" << "Measuring Time of 200s Finished";
-    double* waveTestSix = waveEq(2, 1, freqE, 1, size, 500);
+    animation(10, 100, 2, 2, 1, size, 100);
     cout << "\n" << "Measuring Time of 500s Finished";
     for (i = 0; i < size_sq; i++) {
-        datafile << "\n" << waveTestOne[i] << "\t" << waveTestTwo[i] << "\t" << waveTestThree[i] << "\t" << waveTestFour[i] << "\t" << waveTestFive[i] << "\t" << waveTestSix[i];
+        datafile << "\n" << waveTestOne[i] << "\t" << waveTestTwo[i] << "\t" << waveTestThree[i] << "\t" << waveTestFour[i] << "\t" << waveTestFive[i] << "\t"; //<< waveTestSix[i];
     }
 
 
