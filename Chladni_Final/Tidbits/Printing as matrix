@@ -1,0 +1,6 @@
+for i -> end
+  cout "\n"
+  for j -> end
+    cout mat[i][j]
+
+It's that easy
