@@ -85,7 +85,7 @@ double* waveEqCircle(int modeX, int modeY, double freq, double ampl, int L, int 
 void animationFreq(int low, int high, int modeX, int modeY, double ampl, int L, int time) {
 	ofstream datafile;
 	int i, j, l, m;
-	int range = high - low;
+	int range = int(high) - int(low);
 	int rowMaj, iter;
 	double* output;
 	double** wave = new double* [range];
@@ -97,14 +97,42 @@ void animationFreq(int low, int high, int modeX, int modeY, double ampl, int L, 
 		output = wave[j];
 		cout << "\n" << "Creating file " << j;
 		datafile.open(to_string(j) + ".txt");
-		for (l = 0; l < time; l++) {
+		for (l = 0; l < L; l++) {
 			cout << "\n";
-			for (m = 0; m < time; m++) {
-				rowMaj = m * time;
+			for (m = 0; m < L; m++) {
+				rowMaj = m * L;
 				iter = l + m;
 				datafile << output[iter] << "\t";
 			}
 			
+		}
+		datafile.close();
+	}
+}
+
+void animationTime(double freq, int modeX, int modeY, double ampl, int L, int low, int high) {
+	ofstream datafile;
+	int i, j, l, m;
+	int range = int(high) - int(low);
+	int rowMaj, iter;
+	double* output;
+	double** wave = new double* [range];
+	for (i = low; i < high; i++) {
+		int k = i - low;
+		wave[k] = waveEq(modeX, modeY, freq, ampl, L, i);
+	}
+	for (j = 0; j < range; j++) {
+		output = wave[j];
+		cout << "\n" << "Creating file " << j;
+		datafile.open(to_string(j) + ".txt");
+		for (l = 0; l < L; l++) {
+			cout << "\n";
+			for (m = 0; m < L; m++) {
+				rowMaj = m * L;
+				iter = l + m;
+				datafile << output[iter] << "\t";
+			}
+
 		}
 		datafile.close();
 	}
