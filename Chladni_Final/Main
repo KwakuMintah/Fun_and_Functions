@@ -4,8 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include "KC.hpp"
-#include "Piano.hpp"
-#include "WaveFunc.hpp"
+#include "Functions.hpp"
 using namespace std;
 
 //This is all in mm
@@ -30,43 +29,105 @@ void announcement(bool choice_mat, bool choice_shape, double freq, int size) {
     }
 };
 
+void freqs(double f1, double f2, double f3, double f4, double f5, double f6, double f7, double f8, double f9, double f10, double f11, double f12, double dens, double young, double thick, double pois) {
+    
+}
+
 int main()
 {
     std::cout << "Hello World!\n";
-    ofstream datafile("Chladni.txt");
+    ofstream datafile("Chladni.m");
 
     int i;
 
-    double kE = kVal(629.8, 0.0027, young_al_exp);
-    //double kE = otherKVal(2, 0, 200);
-    //Divide density by 1000 to go from g/cm to g/mm
-    double cE = cVal(young_al_exp, 0.168, 0.0027, pois_al);
-    double freqE = freqPlate(cE, kE);
-
+    int time = 100;
     int size = 240;
     int size_sq = pow(size, 2);
 
-    announcement(true, true, freqE, size);
+    double dens = 0.0027;
+    double young = young_al_exp;
+    double thick = 1.0;
+    double pois = pois_al;
 
-    animationFreq(50, 60, 2, 1, 1, size, 100);
+    //animationTime(freqE, 2, 1, 1, size, 0,time);
 
-    /*
-    cout << "\n" << "Testing Different Times.";
-    double* waveTestOne = waveEq(2, 1, freqE, 1, size, 10);
+    double kOne = kVal(629.8, dens, young);
+    double cOne = cVal(young, thick, dens, pois);
+    double freqOne = freqPlate(cOne, kOne);
+
+    double kTwo = kVal(1022.8, dens, young);
+    double cTwo = cVal(young, thick, dens, pois);
+    double freqTwo = freqPlate(cTwo, kTwo);
+
+    double kThree = kVal(1240.2, dens, young);
+    double cThree = cVal(young, thick, dens, pois);
+    double freqThree = freqPlate(cThree, kThree);
+
+    double kFour = kVal(1368.3, dens, young);
+    double cFour = cVal(young, thick, dens, pois);
+    double freqFour = freqPlate(cFour, kFour);
+
+    double kFive = kVal(1795.4, dens, young);
+    double cFive = cVal(young, thick, dens, pois);
+    double freqFive = freqPlate(cFive, kFive);
+
+    double kSix = kVal(2212.2, dens, young);
+    double cSix = cVal(young, thick, dens, pois);
+    double freqSix = freqPlate(cSix, kSix);
+
+    double kSev = kVal(2435.0, dens, young);
+    double cSev = cVal(young, thick, dens, pois);
+    double freqSev = freqPlate(cSev, kSev);
+
+    double kEight = kVal(2743.8, dens, young);
+    double cEight = cVal(young, thick, dens, pois);
+    double freqEight = freqPlate(cEight, kEight);
+
+    double kNine = kVal(2926.1, dens, young);
+    double cNine = cVal(young, thick, dens, pois);
+    double freqNine = freqPlate(cNine, kNine);
+
+    double kTen = kVal(3434.6, dens, young);
+    double cTen = cVal(young, thick, dens, pois);
+    double freqTen = freqPlate(cTen, kTen);
+
+    double kElev = kVal(3814.6, dens, young);
+    double cElev = cVal(young, thick, dens, pois);
+    double freqElev = freqPlate(cElev, kElev);
+
+    double kTwel = kVal(4252.7, dens, young);
+    double cTwel = cVal(young, thick, dens, pois);
+    double freqTwel = freqPlate(cTwel, kTwel);
+    
+    cout << "\n" << "Testing Different Frequencies.";
+    double* waveTestOne = waveEq(2,1, freqOne, 1, size, time);
     cout << "\n" << "Measuring Time of 10s Finished";
-    double* waveTestTwo = waveEq(2, 1, freqE, 1, size, 20);
+    double* waveTestTwo = waveEq(5,2, freqTwo, 1, size, time);
     cout << "\n" << "Measuring Time of 20s Finished";
-    double* waveTestThree = waveEq(2, 1, freqE, 1, size, 50);
+    double* waveTestThree = waveEq(2,1, freqThree, 1, size, time);
     cout << "\n" << "Measuring Time of 50s Finished";
-    double* waveTestFour = waveEq(2, 1, freqE, 1, size, 100);
+    double* waveTestFour = waveEq(2, 1, freqFour, 1, size, time);
     cout << "\n" << "Measuring Time of 100s Finished";
-    double* waveTestFive = waveEq(2, 1, freqE, 1, size, 200);
+    double* waveTestFive = waveEq(2, 1, freqFive, 1, size, time);
     cout << "\n" << "Measuring Time of 200s Finished";
-    double* waveTestSix = waveEq(2, 1, freqE, 1, size, 500);
-    cout << "\n" << "Measuring Time of 500s Finished";
+    double* waveTestSix = waveEq(2, 1, freqSix, 1, size, time);
+    cout << "\n" << "Measuring Time of 10s Finished";
+    double* waveTestSev = waveEq(2, 1, freqSev, 1, size, time);
+    cout << "\n" << "Measuring Time of 20s Finished";
+    double* waveTestEight = waveEq(2, 1, freqEight, 1, size, time);
+    cout << "\n" << "Measuring Time of 50s Finished";
+    double* waveTestNine = waveEq(2, 1, freqNine, 1, size, time);
+    cout << "\n" << "Measuring Time of 100s Finished";
+    double* waveTestTen = waveEq(2, 1, freqTen, 1, size, time);
+    cout << "\n" << "Measuring Time of 200s Finished";
+    double* waveTestEleven = waveEq(2, 1, freqElev, 1, size, time);
+    cout << "\n" << "Measuring Time of 100s Finished";
+    double* waveTestTwelve = waveEq(2, 1, freqTwel, 1, size, time);
+    cout << "\n" << "Measuring Time of 200s Finished";
+
     for (i = 0; i < size_sq; i++) {
-        datafile << "\n" << waveTestOne[i] << "\t" << waveTestTwo[i] << "\t" << waveTestThree[i] << "\t" << waveTestFour[i] << "\t" << waveTestFive[i] << "\t" << waveTestSix[i];
+        datafile << "\n" << waveTestOne[i] << "\t" << waveTestTwo[i] << "\t" << waveTestThree[i] << "\t" << waveTestFour[i] << "\t" << waveTestFive[i] << "\t" << waveTestSix[i] << "\t" << waveTestSev[i] << "\t" << waveTestEight[i] << "\t" << waveTestNine[i] << "\t" << waveTestTen[i] << "\t" << waveTestEleven[i] << "\t" << waveTestTwelve[i];
     }
-    */
+    
 
 }
