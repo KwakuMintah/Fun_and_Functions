@@ -10,6 +10,8 @@ double pi_doub = 2 * pi;
 
 double sound_v = 346000;
 
+double fAProp = 1249.875;
+
 double young_al = 68;
 double young_kev = 70.5;
 double young_bone = 14;
