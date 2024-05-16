@@ -24,7 +24,6 @@ double cVal(double young, double thick, double dens, double pois) {
 	double frac = num / den;
 	double frac_root = sqrt(frac);
 	double val = coef * frac_root;
-	cout << "\n" << "The Coefficient is: " << val;
 	return val;
 }
 
@@ -32,6 +31,26 @@ double freqPlate(double C, double K) {
 	double k_sq = pow(K, 2);
 	double val = C * k_sq;
 	return val;
+}
+
+double calcAmp(double freq, double proportion) {
+	double val = freq / proportion;
+	return val;
+}
+
+double calcNX(double size, double dens, double young, double freq) {
+	double num = size * sqrt(dens);
+	double frac = num / sqrt(young);
+	double val = freq * frac;
+	return frac;
+}
+
+double calcNY(double K, double size, double nX) {
+	double gamma = 0.02 / size;
+	double brac = K + gamma;
+	//Placeholder so it doesn't crash
+	double num = brac * 1;
+	return 0;
 }
 
 #endif
