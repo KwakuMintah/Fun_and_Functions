@@ -104,7 +104,7 @@ void animationFreq(int low, int high, int modeX, int modeY, double ampl, int L, 
 				iter = l + m;
 				datafile << output[iter] << "\t";
 			}
-			
+
 		}
 		datafile.close();
 	}
